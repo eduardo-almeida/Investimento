@@ -5,9 +5,9 @@ from django.db.models.base import Model
 class Task(models.Model):
 
     STATUS = (
-        ('renda fixa', 'renda fixa'),
-        ('renda variável', 'renda variável'),
-        ('cripto', 'cripto')
+        ('renda fixa', 'Renda Fixa'),
+        ('renda variável', 'Renda Variável'),
+        ('cripto', 'Cripto')
     )
 
     nome = models.CharField(max_length=255)

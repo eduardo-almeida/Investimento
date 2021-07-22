@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-    console.log("filter");
     var baseUrl   = 'http://localhost:8000/';
     var deleteBtn = $('.delete-btn');
     var searchBtn = $('#search-btn');
@@ -27,7 +26,7 @@ $(document).ready(function() {
     $(filter).change(function() {
         var filter = $(this).val();
         console.log(filter);
-        window.location.href = baseUrl + '?filter=' + filter;
+        //window.location.href = baseUrl + '?filter=' + filter;
     });
 
 });
