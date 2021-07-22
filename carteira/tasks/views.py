@@ -1,12 +1,13 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 
-def helloworld(request):
-    return HttpResponse("Ola mundo")
+from .models import Task
 
 def taskList(request):
-    return render(request, 'tasks/list.html')
+    tasks = Task.objects.all()
+    return render(request, 'tasks/list.html', {'tasks': tasks})
 
-def yourName(request, name):
-    return render(request, 'tasks/yourname.html', {'name': name})
+
+def taskView(request, id):
+    task = get_object_or_404(Task, pk=id)
+    return render(request, 'tasks/task.html', {'task': task})
