@@ -2,17 +2,35 @@ from django.http.response import HttpResponse
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, get_object_or_404
 from .forms import TaskForm
+from coins.forms import CoinForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required 
 import datetime
 
 from .models import Task
 
+
 @login_required
 def taskList(request):
     search = request.GET.get('search')
     filter = request.GET.get('filter')
 
+    if search:
+        tasks = Task.objects.filter(coin__nome__icontains=search)
+    elif filter:
+        tasks = Task.objects.filter(coin__modalidade=filter)
+    else:
+        tasks_list = Task.objects.all().order_by('-created_at').filter(user=request.user)
+        paginator = Paginator(tasks_list, 3)
+        page = request.GET.get('page')
+        tasks = paginator.get_page(page)
+    return render(request, 'tasks/list.html', {'tasks': tasks})
+
+@login_required
+def taskList2(request):
+    search = request.GET.get('search')
+    filter = request.GET.get('filter')
+    
     fixa = Task.objects.filter(modalidade='renda fixa', user=request.user).count()
     variavel = Task.objects.filter(modalidade='renda variável', user=request.user).count()
     cripto = Task.objects.filter(modalidade='cripto', user=request.user).count()

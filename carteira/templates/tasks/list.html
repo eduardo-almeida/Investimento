@@ -4,25 +4,11 @@
 
 {% block content %} 
 <div class="offset-1 col-10 list-div">
-    <h1>Lista de Moedas</h1>
-    <div class="container dashboard">
-        <div class="col-4 dashboard-box" id="dashboard-fixa">
-            <h4>Renda Fixa</h4>
-            <span>{{ fixa }}</span>
-        </div>
-        <div class="col-4 dashboard-box" id="dashboard-variavel">
-            <h4>Renda Variável</h4>
-            <span>{{ variavel }}</span>
-        </div>
-        <div class="col-4 dashboard-box" id="dashboard-cripto">
-            <h4>Cripto</h4>
-            <span>{{ cripto }}</span>
-        </div>
-    </div>
+    <h1>Sua Carteira</h1>
 
     <a id="add-link" href="newtask">
         <div id="add-link" class="col-2 add-div">
-            <i class="fas fa-plus"></i> Adicionar Moedas
+            <i class="fas fa-plus"></i> Comprar Moedas
         </div>
     <a>
         
@@ -32,13 +18,14 @@
             <i class="fas fa-search" id="search-btn"></i> 
         </form>
     </div>
+
     <div class="col-12 filter-div">
         <span>Filtra por:</span>
         <select name="filter" id="filter" class="form-control">
             <option value="">Escolha uma opção</option>
-            <option value="renda fixa">Renda Fixa</option>
-            <option value="renda variável">Renda Variável</option>
-            <option value="cripto">Cripto</option>
+            <option value="?filter=fixa">Renda Fixa</option>
+            <option value="?filter=variavel">Renda Variável</option>
+            <option value="?filter=cripto">Cripto</option>
         </select>
     </div>
     {% if messages %}
@@ -51,13 +38,42 @@
         </ul>
     {% endif %}
     <ul class="task-list">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Valor</th>
+                    <th>Quantidade</th>
+                    <th>Total</th>
+                    <th>Mudar quantidade</th>
+                    <th>Vender Tudo</th>
+                </tr>
+            </thead>
+            <tbody>
         {% for task in tasks %}
-        <li class="task-item">
-            <span><a href="/task/{{task.id}}">{{ task.nome }} (R$ {{ task.valor }})</a></span>
-            <a href="deletetask/{{ task.id }}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
-            <a href="edittask/{{ task.id }}"><span><i class="fas fa-edit"></i></span></a>
-        </li>
+        <tr class="task-item">
+            <td class="task-item">
+                <span><a href="/task/{{task.coin.id}}">{{ task.coin.nome }}</a></span>
+            </td>
+            <td class="task-item">
+                <span>R$ {{ task.coin.valor }}</span>
+            </td>
+            <td class="task-item">
+                <span>{{ task.quantidade }}</span>
+            </td>
+            <td class="task-item">
+                <span>R$ {{ task.total }} </span>
+            </td>
+            <td>
+                <a href="/edittask/{{ task.id }}"><span><i class="fas fa-edit"></i></span></a>
+            </td>
+            <td>    
+                <a href="/deletetask/{{ task.id }}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
+            </td>
+        </tr>
         {% endfor %}
+        </tbody>
+        </table>
     </ul>
     <div class="pagination">
         <span class="step-links">

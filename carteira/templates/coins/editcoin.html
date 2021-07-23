@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %} Edição a Moeda {{ task.nome }}{% endblock %}
+{% block title %} Edição a Moeda {{ coin.nome }}{% endblock %}
 
 {% block content %}
 <div class="offset-1 col-10 list-div">
-    <h1> Editando a Moeda {{ task.nome }}</h1>
+    <h1> Editando a Moeda {{ coin.nome }}</h1>
     <form method="POST">
         {% csrf_token %}
         {{ form | crispy }}

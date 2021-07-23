@@ -27,7 +27,7 @@ $(document).ready(function() {
     $(filter).change(function() {
         var filter = $(this).val();
         console.log(filter);
-        window.location.href = baseUrl + '?filter=' + filter;
+        window.location.href = baseUrl + filter;
     });
 
 });

@@ -124,6 +124,9 @@
 
 /* Lista de tarefas */
 
+
+tr:nth-child(even){background-color: #f2f2f2}
+
 .list-div {
     padding: 0;
 }
