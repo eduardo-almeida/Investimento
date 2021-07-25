@@ -18,5 +18,5 @@ class Task(models.Model):
         return self.coin.nome
 
     def total(self):
-        return self.quantidade * self.coin.valor  
+        return self.quantidade * self.coin.valor
 
