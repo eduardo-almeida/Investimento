@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+from django.urls import reverse
+
 class Coin(models.Model):
 
     STATUS = (
@@ -20,3 +22,11 @@ class Coin(models.Model):
 
     def __str__(self):
         return self.nome
+
+    class Meta:
+        ordering = ("nome",)
+        verbose_name = "ativo"
+        verbose_name_plural = "ativos"
+
+    def get_absolute_url(self):
+        return reverse("products:list_by_category", kwargs={"slug": self.slug})

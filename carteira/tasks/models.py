@@ -11,6 +11,8 @@ class Task(models.Model):
     
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
+    is_available = models.BooleanField(default=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
