@@ -137,3 +137,8 @@ LOGOUT_REDIRECT_URL = '/accounts/login'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Cart
+
+CART_SESSION_ID = "cart"
+CART_ITEM_MAX_QUANTITY = 20

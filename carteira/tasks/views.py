@@ -7,6 +7,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required 
 import datetime
 
+from random import randint
+
 from .models import Task
 
 
@@ -26,25 +28,14 @@ def taskList(request):
         tasks = paginator.get_page(page)
     return render(request, 'tasks/list.html', {'tasks': tasks})
 
-@login_required
-def taskList2(request):
-    search = request.GET.get('search')
-    filter = request.GET.get('filter')
-    
-    fixa = Task.objects.filter(modalidade='renda fixa', user=request.user).count()
-    variavel = Task.objects.filter(modalidade='renda variável', user=request.user).count()
-    cripto = Task.objects.filter(modalidade='cripto', user=request.user).count()
 
-    if search:
-        tasks = Task.objects.filter(nome__icontains=search, user=request.user)
-    elif filter:
-        tasks = Task.objects.filter(modalidade=filter, user=request.user)
-    else:
-        tasks_list = Task.objects.all().order_by('-created_at').filter(user=request.user)
-        paginator = Paginator(tasks_list, 3)
-        page = request.GET.get('page')
-        tasks = paginator.get_page(page)
-    return render(request, 'tasks/list.html', {'tasks': tasks, 'fixa': fixa, 'variavel': variavel, 'cripto': cripto})
+@login_required
+def cartDetail(request):
+    if request.session.get('teste') is None:
+        request.session['teste'] = randint(1, 1000)
+        print(randint(1, 1000))
+    del request.session['teste']
+    return render(request, 'tasks/cartdetail.html')
 
 @login_required
 def taskView(request, id):

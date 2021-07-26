@@ -30,7 +30,7 @@
                         <a class="nav-link" href="/">Carteira</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/coinList/">Moedas</a>
+                        <a class="nav-link" href="/coinList/">Ativos</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
@@ -41,6 +41,9 @@
                         <a class="nav-link" href="#">Sobre</a>
                     </li>
                     {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cartdetail/">Meu Carrinho</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/accounts/logout">Sair</a>
                     </li>
